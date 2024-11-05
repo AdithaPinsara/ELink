@@ -1,4 +1,3 @@
-// cart_state.dart
 part of 'cart_bloc.dart';
 
 class CartState extends Equatable {

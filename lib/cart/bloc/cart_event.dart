@@ -1,4 +1,3 @@
-// cart_event.dart
 part of 'cart_bloc.dart';
 
 sealed class CartEvent extends Equatable {
@@ -6,6 +5,7 @@ sealed class CartEvent extends Equatable {
   List<Object> get props => [];
 }
 
+//add item to cart event
 final class CartItemAdded extends CartEvent {
   final Product product;
 
@@ -15,6 +15,7 @@ final class CartItemAdded extends CartEvent {
   List<Object> get props => [product];
 }
 
+//item remove event
 final class CartItemRemoved extends CartEvent {
   final Product product;
 
@@ -24,4 +25,5 @@ final class CartItemRemoved extends CartEvent {
   List<Object> get props => [product];
 }
 
+//cart clear event
 final class CartCleared extends CartEvent {}

@@ -1,5 +1,3 @@
-// cart_bloc.dart
-import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:elink/cart/models/cart_item.dart';
 import 'package:equatable/equatable.dart';
@@ -16,7 +14,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   }
 
   void _onItemAdded(CartItemAdded event, Emitter<CartState> emit) {
-    // Check if the item is already in the cart
+    //check the item is already in the cart
     final existingItem = state.items.firstWhere(
       (item) => item.product.id == event.product.id,
       orElse: () => CartItem(product: event.product, quantity: 0),
@@ -24,14 +22,14 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
     final updatedItems = List<CartItem>.from(state.items);
     if (existingItem.quantity > 0) {
-      // If it exists, increase the quantity
+      //if item exists, increase the quantity
       final index = updatedItems.indexOf(existingItem);
       updatedItems[index] = CartItem(
         product: existingItem.product,
         quantity: existingItem.quantity + 1,
       );
     } else {
-      // If not, add it to the cart with quantity 1
+      //add item to the cart
       updatedItems.add(CartItem(product: event.product, quantity: 1));
     }
 
@@ -52,14 +50,14 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     );
 
     if (existingItem.quantity > 1) {
-      // Decrease quantity if more than 1
+      //decrease quantity
       final index = updatedItems.indexOf(existingItem);
       updatedItems[index] = CartItem(
         product: existingItem.product,
         quantity: existingItem.quantity - 1,
       );
     } else {
-      // Remove the item if quantity is 1
+      //remove the item
       updatedItems.remove(existingItem);
     }
 

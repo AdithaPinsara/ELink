@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class CheckoutScreen extends StatelessWidget {
   const CheckoutScreen({Key? key}) : super(key: key);
 
-  // Calculate total price based on cart items from the CartBloc
+  //calculate total
   double getTotalPrice(List<CartItem> cartItems) {
     return cartItems.fold(
         0, (sum, item) => sum + (item.product.price * item.quantity));
@@ -14,7 +14,7 @@ class CheckoutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Form controllers
+    //form controllers
     final nameController = TextEditingController();
     final addressController = TextEditingController();
     final phoneController = TextEditingController();
@@ -30,7 +30,7 @@ class CheckoutScreen extends StatelessWidget {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Shipping Information Form
+                  //shipping Information Form
                   Text("Shipping Information",
                       style: Theme.of(context).textTheme.titleLarge),
                   const SizedBox(height: 10),
@@ -63,7 +63,6 @@ class CheckoutScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
 
-                  // Cart Summary
                   Text("Order Summary",
                       style: Theme.of(context).textTheme.titleLarge),
                   const SizedBox(height: 10),
@@ -84,7 +83,7 @@ class CheckoutScreen extends StatelessWidget {
                   ),
                   const Divider(),
 
-                  // Total Price
+                  //total Price
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16.0),
                     child: Row(
@@ -100,11 +99,10 @@ class CheckoutScreen extends StatelessWidget {
                     ),
                   ),
 
-                  // Place Order Button
                   Center(
                     child: ElevatedButton(
                       onPressed: () {
-                        // Validate form fields
+                        //validate form fields
                         if (nameController.text.isEmpty ||
                             addressController.text.isEmpty ||
                             phoneController.text.isEmpty) {
@@ -115,13 +113,12 @@ class CheckoutScreen extends StatelessWidget {
                           return;
                         }
 
-                        // Show a confirmation message
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                               content: Text("Order placed successfully!")),
                         );
 
-                        // Clear form fields
+                        //clear form fields
                         nameController.clear();
                         addressController.clear();
                         phoneController.clear();

@@ -19,6 +19,7 @@ class ProductListItem extends StatelessWidget {
         trailing: IconButton(
           icon: const Icon(Icons.add_shopping_cart),
           onPressed: () {
+            //add product to cart
             final cartBloc = BlocProvider.of<CartBloc>(context);
             cartBloc.add(CartItemAdded(product));
             ScaffoldMessenger.of(context).showSnackBar(
@@ -27,6 +28,7 @@ class ProductListItem extends StatelessWidget {
           },
         ),
         onTap: () {
+          //navigate to product detail screen
           Navigator.push(
             context,
             MaterialPageRoute(

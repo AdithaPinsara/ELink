@@ -35,6 +35,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
 
   final http.Client httpClient;
 
+  //get products
   Future<void> _onFetched(
     ProductFetched event,
     Emitter<ProductState> emit,
@@ -60,6 +61,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     }
   }
 
+  //get product details by id
   Future<void> _onDetailFetched(
     ProductDetailFetched event,
     Emitter<ProductState> emit,
@@ -79,6 +81,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     }
   }
 
+  //search products
   Future<void> _onSearch(
     ProductSearchEvent event,
     Emitter<ProductState> emit,

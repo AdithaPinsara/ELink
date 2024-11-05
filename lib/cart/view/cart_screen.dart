@@ -1,7 +1,6 @@
 import 'package:elink/cart/view/checkout_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:elink/products/models/product.dart';
 import 'package:elink/cart/bloc/cart_bloc.dart';
 
 class CartScreen extends StatelessWidget {
@@ -54,19 +53,12 @@ class CartScreen extends StatelessWidget {
                           child: const Text('Clear Cart'),
                         ),
                         ElevatedButton(
-                          // onPressed: () {
-                          //   // Logic to checkout would go here
-                          //   ScaffoldMessenger.of(context).showSnackBar(
-                          //     const SnackBar(
-                          //         content: Text("Order placed successfully!")),
-                          //   );
-                          // },
                           onPressed: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (_) =>
-                                      CheckoutScreen()), // Navigate to CartScreen
+                                      const CheckoutScreen()), // Navigate to checout
                             );
                           },
                           style: ButtonStyle(

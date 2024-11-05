@@ -1,7 +1,6 @@
 import 'package:elink/bloc_observer.dart';
 import 'package:elink/cart/bloc/cart_bloc.dart';
 import 'package:elink/products/bloc/product_bloc.dart';
-import 'package:elink/products/view/product_detail.dart';
 import 'package:elink/products/view/product_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

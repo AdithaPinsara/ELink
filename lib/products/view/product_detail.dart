@@ -17,6 +17,7 @@ class ProductDetailScreen extends StatelessWidget {
       create: (context) => ProductBloc(httpClient: http.Client())
         ..add(ProductDetailFetched(productId)),
       child: Scaffold(
+        //title
         appBar: AppBar(title: const Text('Product Details')),
         body: BlocBuilder<ProductBloc, ProductState>(
           builder: (context, state) {
@@ -26,6 +27,7 @@ class ProductDetailScreen extends StatelessWidget {
                     ProductDetailStatus.success &&
                 state.selectedProduct != null) {
               final Product product = state.selectedProduct!;
+              //product details
               return Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
@@ -45,6 +47,7 @@ class ProductDetailScreen extends StatelessWidget {
                     const SizedBox(height: 24),
                     ElevatedButton(
                       onPressed: () {
+                        //add the product to cart
                         final cartBloc = BlocProvider.of<CartBloc>(context);
                         cartBloc.add(CartItemAdded(product));
                         ScaffoldMessenger.of(context).showSnackBar(

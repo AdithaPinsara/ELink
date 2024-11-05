@@ -35,7 +35,7 @@ class _ProductsListState extends State<ProductsList> {
                 context,
                 MaterialPageRoute(
                     builder: (_) =>
-                        const CartScreen()), // Navigate to CartScreen
+                        const CartScreen()), //navigate to CartScreen
               );
             },
           ),
@@ -43,6 +43,7 @@ class _ProductsListState extends State<ProductsList> {
       ),
       body: Column(
         children: [
+          //seach bar
           Padding(
             padding: const EdgeInsets.all(8),
             child: TextField(
@@ -58,6 +59,7 @@ class _ProductsListState extends State<ProductsList> {
               onSubmitted: (_) => _onSearch(),
             ),
           ),
+          //product list
           Expanded(
             child: BlocBuilder<ProductBloc, ProductState>(
               builder: (context, state) {
