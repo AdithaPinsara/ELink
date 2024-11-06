@@ -5,8 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 
 class LoginScreen extends StatelessWidget {
-  final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _usernameController =
+      TextEditingController(); //controller for the username
+  final TextEditingController _passwordController =
+      TextEditingController(); //controller for the password
 
   LoginScreen({super.key});
 
@@ -33,7 +35,7 @@ class LoginScreen extends StatelessWidget {
               );
             } else if (state.status == UserLoginStatus.failure) {
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Error!')),
+                const SnackBar(content: Text('Error while trying to login!')),
               );
             }
           },

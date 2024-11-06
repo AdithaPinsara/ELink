@@ -19,6 +19,7 @@ class UserDataBloc extends Bloc<UserDataEvent, UserDataState> {
     });
   }
 
+  //get the user data and check password
   Future<void> _onUserDataFetched(
     LoginSubmitted event,
     Emitter<UserDataState> emit,

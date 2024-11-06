@@ -7,6 +7,7 @@ abstract class UserDataEvent extends Equatable {
   List<Object?> get props => [];
 }
 
+//event fro login
 class LoginSubmitted extends UserDataEvent {
   final String username;
   final String password;
@@ -17,4 +18,5 @@ class LoginSubmitted extends UserDataEvent {
   List<Object?> get props => [username, password];
 }
 
+//event for clear user data
 class ClearUserData extends UserDataEvent {}

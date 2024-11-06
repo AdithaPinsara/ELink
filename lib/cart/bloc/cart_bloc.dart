@@ -11,13 +11,10 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   final Box<CartItem> cartBox;
 
   CartBloc({required this.cartBox}) : super(const CartState()) {
-    on<CartInitialized>(_onCartInitialized); // Handler for initialization
+    on<CartInitialized>(_onCartInitialized);
     on<CartItemAdded>(_onItemAdded);
     on<CartItemRemoved>(_onItemRemoved);
     on<CartCleared>(_onCartCleared);
-
-    // Trigger the initialization event
-    add(CartInitialized());
   }
 
   Future<void> _onCartInitialized(

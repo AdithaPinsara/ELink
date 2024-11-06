@@ -14,6 +14,7 @@ part 'product_state.dart';
 const _postLimit = 20;
 const throttleDuration = Duration(milliseconds: 100);
 
+//throttle droppable is used to ignore new events while the curent event is being processed
 EventTransformer<E> throttleDroppable<E>(Duration duration) {
   return (events, mapper) {
     return droppable<E>().call(events.throttle(duration), mapper);

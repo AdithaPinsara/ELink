@@ -3,7 +3,6 @@ import 'package:elink/cart/bloc/cart_bloc.dart';
 import 'package:elink/cart/models/cart_item.dart';
 import 'package:elink/products/bloc/product_bloc.dart';
 import 'package:elink/products/models/product.dart';
-import 'package:elink/products/view/product_list.dart';
 import 'package:elink/user_data/bloc/user_data_bloc.dart';
 import 'package:elink/user_data/view/login_screen.dart';
 import 'package:flutter/material.dart';
@@ -14,11 +13,12 @@ import 'package:hive_flutter/hive_flutter.dart';
 void main() async {
   await Hive.initFlutter();
 
-  // Register the generated adapters
+  //register the generated hive adapters
   Hive.registerAdapter(ProductAdapter());
   Hive.registerAdapter(CartItemAdapter());
 
-  final cartBox = await Hive.openBox<CartItem>('cartBox');
+  final cartBox =
+      await Hive.openBox<CartItem>('cartBox'); //create hive box for cart
   Bloc.observer = const SimpleBlocObserver();
   runApp(MainApp(cartBox: cartBox));
 }
@@ -38,7 +38,7 @@ class MainApp extends StatelessWidget {
               ProductBloc(httpClient: http.Client())..add(ProductFetched()),
         ),
         BlocProvider(
-          create: (_) => CartBloc(cartBox: cartBox),
+          create: (_) => CartBloc(cartBox: cartBox)..add(CartInitialized()),
         ),
         BlocProvider(
           create: (_) => UserDataBloc(httpClient: http.Client()),
