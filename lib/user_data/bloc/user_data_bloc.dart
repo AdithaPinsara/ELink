@@ -13,6 +13,10 @@ class UserDataBloc extends Bloc<UserDataEvent, UserDataState> {
 
   UserDataBloc({required this.httpClient}) : super(const UserDataState()) {
     on<LoginSubmitted>(_onUserDataFetched);
+    on<ClearUserData>((event, emit) {
+      emit(state.copyWith(
+          status: UserLoginStatus.initial, password: null, userName: null));
+    });
   }
 
   Future<void> _onUserDataFetched(

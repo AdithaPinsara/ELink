@@ -1,4 +1,5 @@
 import 'package:elink/cart/view/cart_screen.dart';
+import 'package:elink/user_data/bloc/user_data_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:elink/products/bloc/product_bloc.dart';
@@ -27,6 +28,13 @@ class _ProductsListState extends State<ProductsList> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Product List"),
+        leading: IconButton(
+          icon: const Icon(Icons.logout),
+          onPressed: () {
+            context.read<UserDataBloc>().add(ClearUserData());
+            Navigator.pop(context);
+          },
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.shopping_cart),

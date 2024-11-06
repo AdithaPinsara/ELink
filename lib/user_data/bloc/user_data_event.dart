@@ -16,3 +16,5 @@ class LoginSubmitted extends UserDataEvent {
   @override
   List<Object?> get props => [username, password];
 }
+
+class ClearUserData extends UserDataEvent {}

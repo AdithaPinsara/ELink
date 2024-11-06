@@ -19,6 +19,8 @@ class LoginScreen extends StatelessWidget {
         child: BlocListener<UserDataBloc, UserDataState>(
           listener: (context, state) {
             if (state.status == UserLoginStatus.success) {
+              _usernameController.clear();
+              _passwordController.clear();
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                     content: Text('Welcome, ${state.userName?.username}!')),

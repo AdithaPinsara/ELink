@@ -32,7 +32,8 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       _onDetailFetched,
       transformer: throttleDroppable(throttleDuration),
     );
-    on<ProductSearchEvent>(_onSearch);
+    on<ProductSearchEvent>(_onSearch,
+        transformer: throttleDroppable(throttleDuration));
   }
 
   //get products
@@ -43,7 +44,8 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     if (state.hasReachedMax) return;
 
     try {
-      final products = await _fetchProducts(page: state.currentPage + 1);
+      final products =
+          await _fetchProducts(page: state.currentPage + 1, query: null);
 
       if (products.isEmpty) {
         return emit(state.copyWith(hasReachedMax: true));
@@ -94,6 +96,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
           status: ProductStatus.success,
           product: products,
           hasReachedMax: true,
+          currentPage: 1,
         ),
       );
     } catch (_) {

@@ -1,10 +1,23 @@
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:equatable/equatable.dart';
 
+part 'product.g.dart';
+
+@HiveType(typeId: 0)
 class Product extends Equatable {
+  @HiveField(0)
   final int id;
+
+  @HiveField(1)
   final String name;
+
+  @HiveField(2)
   final String description;
+
+  @HiveField(3)
   final double price;
+
+  @HiveField(4)
   final String imageUrl;
 
   const Product({

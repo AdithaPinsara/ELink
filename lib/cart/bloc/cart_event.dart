@@ -27,3 +27,5 @@ final class CartItemRemoved extends CartEvent {
 
 //cart clear event
 final class CartCleared extends CartEvent {}
+
+final class CartInitialized extends CartEvent {}
