@@ -17,8 +17,14 @@ class ProductDetailScreen extends StatelessWidget {
       create: (context) => ProductBloc(httpClient: http.Client())
         ..add(ProductDetailFetched(productId)),
       child: Scaffold(
+        backgroundColor: Colors.blueGrey,
         //title
-        appBar: AppBar(title: const Text('Product Details')),
+        appBar: AppBar(
+            backgroundColor: Colors.blueGrey,
+            title: const Text(
+              'Product Details',
+              style: TextStyle(fontSize: 30),
+            )),
         body: BlocBuilder<ProductBloc, ProductState>(
           builder: (context, state) {
             if (state.productDetailStatus == ProductDetailStatus.loading) {
@@ -33,17 +39,22 @@ class ProductDetailScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Image.network(product.imageUrl, height: 200),
+                    Center(child: Image.network(product.imageUrl, height: 200)),
                     const SizedBox(height: 16),
-                    Text(product.name,
-                        style: const TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.bold)),
+                    Center(
+                      child: Text(product.name,
+                          style: const TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white)),
+                    ),
                     const SizedBox(height: 8),
                     Text('\$${product.price}',
-                        style:
-                            const TextStyle(fontSize: 20, color: Colors.green)),
+                        style: TextStyle(fontSize: 25, color: Colors.red[700])),
                     const SizedBox(height: 16),
-                    Text(product.description),
+                    Text(product.description,
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 20)),
                     const SizedBox(height: 24),
                     ElevatedButton(
                       onPressed: () {
@@ -55,6 +66,16 @@ class ProductDetailScreen extends StatelessWidget {
                               content: Text('Product added to cart')),
                         );
                       },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blueGrey[700],
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 24.0, vertical: 12.0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        elevation: 5,
+                      ),
                       child: const Text('Add to Cart'),
                     ),
                   ],

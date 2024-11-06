@@ -9,11 +9,21 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Cart')),
+      backgroundColor: Colors.blueGrey,
+      appBar: AppBar(
+          backgroundColor: Colors.blueGrey,
+          title: const Text(
+            'Cart',
+            style: TextStyle(fontSize: 30),
+          )),
       body: BlocBuilder<CartBloc, CartState>(
         builder: (context, state) {
           if (state.items.isEmpty) {
-            return const Center(child: Text('Your cart is empty.'));
+            return const Center(
+                child: Text(
+              'Your cart is empty.',
+              style: TextStyle(fontSize: 30),
+            ));
           }
           return Column(
             children: [
@@ -23,11 +33,19 @@ class CartScreen extends StatelessWidget {
                   itemBuilder: (context, index) {
                     final cartItem = state.items[index];
                     return ListTile(
-                      title: Text(cartItem.product.name),
+                      title: Text(cartItem.product.name,
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 20)),
                       subtitle: Text(
-                          '\$${cartItem.product.price}   X ${cartItem.quantity}'),
+                          '\$${cartItem.product.price}   X ${cartItem.quantity}',
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 15)),
                       trailing: IconButton(
-                        icon: const Icon(Icons.remove),
+                        icon: const Icon(
+                          Icons.remove,
+                          color: Colors.white,
+                          size: 28,
+                        ),
                         onPressed: () {
                           context
                               .read<CartBloc>()
@@ -42,7 +60,13 @@ class CartScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
                   children: [
-                    Text('Total Price: \$${state.totalPrice}'),
+                    Text(
+                      'Total Price: \$${state.totalPrice}',
+                      style: const TextStyle(color: Colors.red, fontSize: 30),
+                    ),
+                    const SizedBox(
+                      height: 25,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -50,6 +74,16 @@ class CartScreen extends StatelessWidget {
                           onPressed: () {
                             context.read<CartBloc>().add(CartCleared());
                           },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.blueGrey[700],
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 24.0, vertical: 12.0),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            elevation: 5,
+                          ),
                           child: const Text('Clear Cart'),
                         ),
                         ElevatedButton(
@@ -61,15 +95,24 @@ class CartScreen extends StatelessWidget {
                                       const CheckoutScreen()), // Navigate to checout
                             );
                           },
-                          style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all(Colors.lightBlue),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.blueGrey[700],
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 24.0, vertical: 12.0),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            elevation: 5,
                           ),
                           child: const Text("Checkout",
                               style: TextStyle(color: Colors.white)),
                         ),
                       ],
                     ),
+                    const SizedBox(
+                      height: 10,
+                    )
                   ],
                 ),
               ),

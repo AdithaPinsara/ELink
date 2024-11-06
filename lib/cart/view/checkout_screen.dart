@@ -1,5 +1,6 @@
 import 'package:elink/cart/bloc/cart_bloc.dart';
 import 'package:elink/cart/models/cart_item.dart';
+import 'package:elink/cart/widgets/checkout_form_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,7 +21,13 @@ class CheckoutScreen extends StatelessWidget {
     final phoneController = TextEditingController();
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Checkout")),
+      backgroundColor: Colors.blueGrey,
+      appBar: AppBar(
+          backgroundColor: Colors.blueGrey,
+          title: const Text(
+            "Checkout",
+            style: TextStyle(fontSize: 30),
+          )),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: BlocBuilder<CartBloc, CartState>(
@@ -35,31 +42,22 @@ class CheckoutScreen extends StatelessWidget {
                       style: Theme.of(context).textTheme.titleLarge),
                   const SizedBox(height: 10),
 
-                  TextField(
+                  CheckoutFormTextField(
                     controller: nameController,
-                    decoration: const InputDecoration(
-                      labelText: "Name",
-                      border: OutlineInputBorder(),
-                    ),
+                    labelText: "Name",
                   ),
                   const SizedBox(height: 10),
 
-                  TextField(
+                  CheckoutFormTextField(
                     controller: addressController,
-                    decoration: const InputDecoration(
-                      labelText: "Address",
-                      border: OutlineInputBorder(),
-                    ),
+                    labelText: "Address",
                   ),
                   const SizedBox(height: 10),
 
-                  TextField(
+                  CheckoutFormTextField(
                     controller: phoneController,
+                    labelText: "Phone Number",
                     keyboardType: TextInputType.phone,
-                    decoration: const InputDecoration(
-                      labelText: "Phone Number",
-                      border: OutlineInputBorder(),
-                    ),
                   ),
                   const SizedBox(height: 20),
 
@@ -74,10 +72,21 @@ class CheckoutScreen extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final item = cartItems[index];
                       return ListTile(
-                        title: Text(item.product.name),
-                        subtitle: Text("Quantity: ${item.quantity}"),
+                        title: Text(
+                          item.product.name,
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 18),
+                        ),
+                        subtitle: Text(
+                          "Quantity: ${item.quantity}",
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 16),
+                        ),
                         trailing: Text(
-                            "\$${(item.product.price * item.quantity).toStringAsFixed(2)}"),
+                          "\$${(item.product.price * item.quantity).toStringAsFixed(2)}",
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 18),
+                        ),
                       );
                     },
                   ),
@@ -91,10 +100,14 @@ class CheckoutScreen extends StatelessWidget {
                       children: [
                         const Text("Total:",
                             style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold)),
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white)),
                         Text("\$${getTotalPrice(cartItems).toStringAsFixed(2)}",
                             style: const TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold)),
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white)),
                       ],
                     ),
                   ),
@@ -122,10 +135,20 @@ class CheckoutScreen extends StatelessWidget {
                         nameController.clear();
                         addressController.clear();
                         phoneController.clear();
+
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+                        context.read<CartBloc>().add(CartCleared());
                       },
                       style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blueGrey[700],
+                        foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 50, vertical: 15),
+                            horizontal: 24.0, vertical: 12.0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        elevation: 5,
                       ),
                       child: const Text("Place Order"),
                     ),

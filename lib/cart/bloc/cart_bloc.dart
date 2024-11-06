@@ -17,6 +17,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     on<CartCleared>(_onCartCleared);
   }
 
+  //initialize the cart when app starts with saved data
   Future<void> _onCartInitialized(
       CartInitialized event, Emitter<CartState> emit) async {
     final items = cartBox.values.toList();
@@ -29,11 +30,13 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     ));
   }
 
+  //helper method to add items to the local cart data hive
   Future<void> _saveCartToLocalStorage(List<CartItem> items) async {
     await cartBox.clear();
     await cartBox.addAll(items);
   }
 
+  //add item to cart
   void _onItemAdded(CartItemAdded event, Emitter<CartState> emit) {
     final existingItem = state.items.firstWhere(
       (item) => item.product.id == event.product.id,
@@ -62,6 +65,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     _saveCartToLocalStorage(updatedItems);
   }
 
+  //remove cart item
   void _onItemRemoved(CartItemRemoved event, Emitter<CartState> emit) {
     final updatedItems = List<CartItem>.from(state.items);
     final existingItem = updatedItems.firstWhere(
@@ -90,6 +94,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     _saveCartToLocalStorage(updatedItems);
   }
 
+  //clear the cart
   void _onCartCleared(CartCleared event, Emitter<CartState> emit) {
     emit(const CartState());
     cartBox.clear();

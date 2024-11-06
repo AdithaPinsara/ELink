@@ -26,8 +26,11 @@ class _ProductsListState extends State<ProductsList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blueGrey,
       appBar: AppBar(
-        title: const Text("Product List"),
+        backgroundColor: Colors.blueGrey,
+        title: const Center(
+            child: Text("Product List", style: TextStyle(fontSize: 30))),
         leading: IconButton(
           icon: const Icon(Icons.logout),
           onPressed: () {
@@ -58,9 +61,33 @@ class _ProductsListState extends State<ProductsList> {
               controller: _searchController,
               decoration: InputDecoration(
                 labelText: 'Search Products',
-                border: const OutlineInputBorder(),
+                labelStyle: const TextStyle(color: Colors.white70),
+                filled: true,
+                fillColor: Colors.blueGrey[700],
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                  borderSide: BorderSide(
+                    color: Colors.blueGrey[400]!,
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                  borderSide: BorderSide(
+                    color: Colors.blueGrey[400]!,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                  borderSide: const BorderSide(
+                    color: Colors.white,
+                    width: 2.0,
+                  ),
+                ),
                 suffixIcon: IconButton(
-                  icon: const Icon(Icons.search),
+                  icon: const Icon(
+                    Icons.search,
+                    color: Colors.white,
+                  ),
                   onPressed: () => _onSearch(),
                 ),
               ),
