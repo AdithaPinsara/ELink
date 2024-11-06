@@ -21,6 +21,8 @@ EventTransformer<E> throttleDroppable<E>(Duration duration) {
 }
 
 class ProductBloc extends Bloc<ProductEvent, ProductState> {
+  final http.Client httpClient;
+
   ProductBloc({required this.httpClient}) : super(const ProductState()) {
     on<ProductFetched>(
       _onFetched,
@@ -32,8 +34,6 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     );
     on<ProductSearchEvent>(_onSearch);
   }
-
-  final http.Client httpClient;
 
   //get products
   Future<void> _onFetched(
